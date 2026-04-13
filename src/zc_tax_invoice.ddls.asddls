@@ -1,0 +1,42 @@
+@AccessControl.authorizationCheck: #NOT_REQUIRED
+@EndUserText.label: 'consumption for tax invoice'
+@Metadata.ignorePropagatedAnnotations: true
+@UI.headerInfo:{
+    typeName: 'Tax Invoice',
+    typeNamePlural: 'Tax Invoice',
+    title:{ type: #STANDARD, value: 'billingdocument' } }
+define root view entity ZC_TAX_INVOICE as projection on zi_tax_invoice
+{
+ @UI.facet: [{ id : 'billingdocument',
+  purpose: #STANDARD,
+  type: #IDENTIFICATION_REFERENCE,
+  label: 'Tax Invoice',
+   position: 10 }]
+       @UI.lineItem:       [{ position: 10, label: 'Billingdocument' },{ type: #FOR_ACTION , dataAction: 'ZPRINT', label: 'Generate Print'},
+                             { type: #FOR_ACTION, dataAction: 'ZDIGITALSIG', label: 'Digital signature', position: 20 } ]
+//                              { type: #FOR_ACTION, dataAction: 'ZDIGITALSIG', label: 'Digital signature' }  ]
+  @UI.identification: [{ position: 10, label: 'billingdocument' }]
+  @UI.selectionField: [{ position: 10 }]
+    key BillingDocument,
+   
+   @UI.lineItem:       [
+                             { type: #FOR_ACTION, dataAction: 'ZDIGITALSIG', label: 'Digital signature', position: 20 } ]
+//                              { type: #FOR_ACTION, dataAction: 'ZDIGITALSIG', label: 'Digital signature' }  ]
+  @UI.identification: [{ position: 10, label: 'URL' }]
+  @UI.selectionField: [{ position: 10 }]
+     zsigninv1, 
+//    key CompanyCode,
+//    key FiscalYear,
+    
+    base64,
+    base64_4,
+    base64_5,
+    base64_6,
+//    base64_main,
+    m_ind,
+    printype
+}
+
+
+
+

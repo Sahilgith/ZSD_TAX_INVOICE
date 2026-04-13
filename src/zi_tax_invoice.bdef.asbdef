@@ -1,0 +1,27 @@
+managed implementation in class zbp_i_tax_invoice unique;
+strict ( 2 );
+
+define behavior for zi_tax_invoice alias zi_tax_invoice_doc
+with unmanaged save
+lock master
+authorization master ( instance )
+//etag master <field_name> " Uncomment if optimistic locking is needed
+{
+  action ( features : instance ) ZPRINT parameter ZABS_PRINT_NAMES result [1] $self;
+   action ( features : instance ) ZDIGITALSIG result [1] $self;
+  update;
+  field ( readonly ) billingdocument;
+
+  mapping for ztb_tax_invoice
+    {
+      billingdocument = billingdocument;
+      base64        = base64;
+      base64_4    = base64_4;
+      base64_5    = base64_5;
+      base64_6    = base64_6;
+      zsigninv1   = zsigninv1;
+    }
+
+
+
+}
